@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS base-image
+FROM ubuntu:24.04 AS base-image
 
 ENV OSX_SDK="MacOSX14.0.sdk"
 ENV OSX_SDK_URL="https://github.com/joseluisq/macosx-sdks/releases/download/14.0/${OSX_SDK}.tar.xz"
@@ -27,7 +27,7 @@ RUN apt install -y autoconf libtool \
     python3-pip \
     libminizip-dev
 
-RUN pip3 install scons
+RUN pip3 install scons --break-system-packages
 
 RUN git clone https://github.com/tpoechtrager/osxcross.git
 
@@ -62,5 +62,5 @@ RUN cp /zsign/bin/zsign /usr/local/bin
 
 RUN rm -r /zsign
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 COPY --from=base-image / /

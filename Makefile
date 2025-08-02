@@ -22,19 +22,19 @@ SHELL_COMMAND = bash
 all: ubuntu mingw osxcross ioscross android web 
 
 ubuntu:
-	docker build -t godot-csound-ubuntu ./platform/ubuntu
+	docker build -t godot-ubuntu ./platform/ubuntu
 
 web:
-	docker build -t godot-csound-web ./platform/web
+	docker build -t godot-web ./platform/web
 
 mingw:
-	docker build -t godot-csound-mingw ./platform/mingw
+	docker build -t godot-mingw ./platform/mingw
 
 osxcross:
-	docker build -t godot-csound-osxcross ./platform/osxcross
+	docker build -t godot-osxcross ./platform/osxcross
 
 ioscross:
-	docker build -t godot-csound-ioscross ./platform/ioscross
+	docker build -t godot-ioscross ./platform/ioscross
 
 android:
-	docker build -t godot-csound-android ./platform/android
+	docker build -t godot-android ./platform/android

@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS base-image
+FROM ubuntu:24.04 AS base-image
 
 ENV ANDROID_SDK_ROOT=/root/sdk
 ENV ANDROID_NDK_VERSION=23.2.8568313
@@ -44,9 +44,9 @@ RUN chown -R 1000:1000 /root
 
 RUN apt install -y python3
 RUN apt install -y python3-pip
-RUN pip3 install scons
+RUN pip3 install scons --break-system-packages
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 COPY --from=base-image / /
 
 ENV ANDROID_SDK_ROOT=/root/sdk
