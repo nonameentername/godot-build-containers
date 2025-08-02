@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS base-image
+FROM ubuntu:24.04 AS base-image
 
 RUN apt update -y
 RUN apt install -y autoconf libtool \
@@ -145,7 +145,7 @@ WORKDIR /
 RUN rm -rf $XCODE xcode cctools-port
 
 RUN apt install -y python3 python3-pip
-RUN pip3 install scons==v4.6.0
+RUN pip3 install scons==v4.6.0 --break-system-packages
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 COPY --from=base-image / /

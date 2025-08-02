@@ -1,4 +1,4 @@
-FROM ubuntu:22.04  AS base-image
+FROM ubuntu:24.04  AS base-image
 
 RUN sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
 RUN apt update -y
@@ -15,7 +15,7 @@ RUN apt install -y autoconf
 RUN apt install -y libtool
 RUN apt install -y flex
 RUN apt install -y bison
-RUN pip3 install scons
+RUN pip3 install scons --break-system-packages
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 COPY --from=base-image / /

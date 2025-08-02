@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS base-image
+FROM ubuntu:24.04 AS base-image
 
 RUN apt update -y
 RUN apt install -y mingw-w64-x86-64-dev
@@ -16,7 +16,7 @@ RUN apt install -y zip
 RUN apt install -y flex bison
 RUN apt install -y python3
 RUN apt install -y python3-pip
-RUN pip3 install scons
+RUN pip3 install scons --break-system-packages
 
 RUN update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
 RUN update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
@@ -30,5 +30,5 @@ RUN apt update
 
 RUN apt install -y powershell
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 COPY --from=base-image / /
