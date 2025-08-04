@@ -10,7 +10,7 @@ RUN apt install -y autoconf libtool \
     curl \
     zip \
     flex bison \
-    clang \
+    clang-14 \
     make \
     libssl-dev \
     liblzma-dev \
@@ -20,6 +20,11 @@ RUN apt install -y autoconf libtool \
     cpio \
     pkg-config \
     ninja-build
+
+RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100
+RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-14 100
+RUN update-alternatives --install /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-14 100
+RUN update-alternatives --install /usr/bin/llvm-ranlib llvm-ranlib /usr/bin/llvm-ranlib-14 100
 
 ARG XCODE=Xcode_15.1.xip
 ARG DOWNLOAD_URL=http://172.17.0.1:8000/$XCODE
