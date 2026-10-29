@@ -29,6 +29,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set snapshot tag
+        run: echo "SNAPSHOT=${VERSION}-$(date -u +%Y%m%d).${{ github.run_number }}" >> $GITHUB_ENV
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -44,7 +47,7 @@ jobs:
         with:
           context: platform/ubuntu
           push: true
-          tags: ghcr.io/nonameentername/godot-ubuntu:${{ env.VERSION }},ghcr.io/nonameentername/godot-ubuntu:latest
+          tags: ghcr.io/nonameentername/godot-ubuntu:${{ env.VERSION }},ghcr.io/nonameentername/godot-ubuntu:latest,ghcr.io/nonameentername/godot-ubuntu:${{ env.SNAPSHOT }}
 
   build-and-push-windows-image:
     name: Windows (MinGW)
@@ -59,6 +62,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set snapshot tag
+        run: echo "SNAPSHOT=${VERSION}-$(date -u +%Y%m%d).${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -75,7 +81,7 @@ jobs:
         with:
           context: platform/mingw
           push: true
-          tags: ghcr.io/nonameentername/godot-mingw:${{ env.VERSION }},ghcr.io/nonameentername/godot-mingw:latest
+          tags: ghcr.io/nonameentername/godot-mingw:${{ env.VERSION }},ghcr.io/nonameentername/godot-mingw:latest,ghcr.io/nonameentername/godot-mingw:${{ env.SNAPSHOT }}
 
   build-and-push-macos-image:
     name: MacOS (osxcross)
@@ -90,6 +96,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set snapshot tag
+        run: echo "SNAPSHOT=${VERSION}-$(date -u +%Y%m%d).${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -106,7 +115,7 @@ jobs:
         with:
           context: platform/osxcross
           push: true
-          tags: ghcr.io/nonameentername/godot-osxcross:${{ env.VERSION }},ghcr.io/nonameentername/godot-osxcross:latest
+          tags: ghcr.io/nonameentername/godot-osxcross:${{ env.VERSION }},ghcr.io/nonameentername/godot-osxcross:latest,ghcr.io/nonameentername/godot-osxcross:${{ env.SNAPSHOT }}
 
   build-and-push-ios-image:
     name: iOS (ioscross)
@@ -121,6 +130,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set snapshot tag
+        run: echo "SNAPSHOT=${VERSION}-$(date -u +%Y%m%d).${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -137,7 +149,7 @@ jobs:
         with:
           context: platform/ioscross
           push: true
-          tags: ghcr.io/nonameentername/godot-ioscross:${{ env.VERSION }},ghcr.io/nonameentername/godot-ioscross:latest
+          tags: ghcr.io/nonameentername/godot-ioscross:${{ env.VERSION }},ghcr.io/nonameentername/godot-ioscross:latest,ghcr.io/nonameentername/godot-ioscross:${{ env.SNAPSHOT }}
           build-args: |
             DOWNLOAD_URL=${{ vars.IOSCROSS_DOWNLOAD_URL }}
           secrets: |
@@ -157,6 +169,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set snapshot tag
+        run: echo "SNAPSHOT=${VERSION}-$(date -u +%Y%m%d).${{ github.run_number }}" >> $GITHUB_ENV
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -172,7 +187,7 @@ jobs:
         with:
           context: platform/android
           push: true
-          tags: ghcr.io/nonameentername/godot-android:${{ env.VERSION }},ghcr.io/nonameentername/godot-android:latest
+          tags: ghcr.io/nonameentername/godot-android:${{ env.VERSION }},ghcr.io/nonameentername/godot-android:latest,ghcr.io/nonameentername/godot-android:${{ env.SNAPSHOT }}
 
   build-and-push-wasm-image:
     name: Wasm (emscripten)
@@ -187,6 +202,9 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set snapshot tag
+        run: echo "SNAPSHOT=${VERSION}-$(date -u +%Y%m%d).${{ github.run_number }}" >> $GITHUB_ENV
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -203,4 +221,4 @@ jobs:
         with:
           context: platform/web
           push: true
-          tags: ghcr.io/nonameentername/godot-wasm:${{ env.VERSION }},ghcr.io/nonameentername/godot-wasm:latest
+          tags: ghcr.io/nonameentername/godot-wasm:${{ env.VERSION }},ghcr.io/nonameentername/godot-wasm:latest,ghcr.io/nonameentername/godot-wasm:${{ env.SNAPSHOT }}
